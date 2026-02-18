@@ -339,6 +339,147 @@
         </div>
       </aside>
 <!-- PARTE 4/6 FIN -->
+<!-- PARTE 5/6 INICIO -->
+      <!-- APP -->
+      <section class="card hidden" id="app">
+        <div class="head">
+          <h1>Formulario (2 minutos)</h1>
+          <p>
+            Completa tus datos. Al final eliges PayPal o Cash App y se abre WhatsApp con el mensaje listo.
+          </p>
+          <div class="chip" id="stepPill"><span class="tick">✓</span> Paso 1 de 4</div>
+        </div>
+
+        <div class="content">
+          <form id="leadForm">
+            <div class="panel" data-step="1">
+              <div class="row">
+                <div>
+                  <label>Nombre y Apellido</label>
+                  <input id="fullName" placeholder="Ej: Juan Pérez" autocomplete="name">
+                </div>
+                <div>
+                  <label>Teléfono</label>
+                  <input id="phone" placeholder="Ej: (555) 123-4567" autocomplete="tel">
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:12px;">
+                <div>
+                  <label>Email</label>
+                  <input id="email" placeholder="Ej: correo@gmail.com" autocomplete="email">
+                </div>
+                <div>
+                  <label>Ciudad / Estado</label>
+                  <input id="city" placeholder="Ej: Miami, FL" autocomplete="address-level2">
+                </div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <label>Título profesional</label>
+                <input id="headline" placeholder="Ej: Warehouse • Driver • Customer Service">
+                <div class="hint">Ejemplo: “Warehouse Associate con 3 años de experiencia”.</div>
+              </div>
+
+              <div class="actions">
+                <button class="btn" type="button" id="backToLanding">← Volver</button>
+                <button class="btn primary" type="button" id="next1">Siguiente →</button>
+              </div>
+            </div>
+
+            <div class="panel hidden" data-step="2">
+              <div class="row">
+                <div>
+                  <label>Puesto que buscas</label>
+                  <input id="roleTarget" placeholder="Ej: Warehouse Associate">
+                </div>
+                <div>
+                  <label>Permiso de trabajo</label>
+                  <select id="workAuth">
+                    <option value="">Selecciona…</option>
+                    <option>Autorizado para trabajar en USA</option>
+                    <option>Permiso en proceso</option>
+                    <option>Prefiero no decirlo</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <label>Habilidades (con comas)</label>
+                <input id="skills" placeholder="Ej: inventario, forklift, bilingüe, Excel">
+              </div>
+
+              <div style="margin-top:12px;">
+                <label>Experiencia</label>
+                <textarea id="experience" placeholder="Ej: 2021–2024: Warehouse Associate en X…"></textarea>
+              </div>
+
+              <div style="margin-top:12px;">
+                <label>Educación / cursos (opcional)</label>
+                <textarea id="education" placeholder="Ej: Bachiller, OSHA 10…"></textarea>
+              </div>
+
+              <!-- Uploadcare: subir archivo -->
+              <div style="margin-top:12px;">
+                <label>Subir archivo (PDF, Word, Imagen)</label>
+                <input type="hidden"
+                       role="uploadcare-uploader"
+                       id="fileUpload"
+                       data-clearable="true"
+                       data-multiple="false"
+                       data-tabs="file url camera">
+                <div class="hint">Opcional: si ya tienes un CV o información previa.</div>
+              </div>
+
+              <div class="actions">
+                <button class="btn" type="button" id="back2">← Atrás</button>
+                <button class="btn primary" type="button" id="next2">Generar Resumen →</button>
+              </div>
+            </div>
+
+            <div class="panel hidden" data-step="3">
+              <div class="chip"><span class="tick">✓</span> Resumen</div>
+              <div class="divider"></div>
+              <div class="summary" id="aiSummary"></div>
+
+              <div class="actions">
+                <button class="btn" type="button" id="back3">← Editar</button>
+                <button class="btn primary" type="button" id="next3">Ir a pago →</button>
+              </div>
+            </div>
+
+            <div class="panel hidden" data-step="4">
+              <div class="chip"><span class="tick">✓</span> Pago (elige 1) + WhatsApp</div>
+              <div class="divider"></div>
+
+              <div class="cols">
+                <a class="btn primary" id="paypalBtn" href="#" target="_blank" rel="noopener">
+                  ✅ Pagar con PayPal (US$25)
+                </a>
+
+                <a class="btn ghost" id="cashappBtn" href="#" target="_blank" rel="noopener">
+                  💵 Pagar con Cash App (US$25)
+                </a>
+              </div>
+
+              <div class="small2" style="margin-top:10px;">
+                Importante: En la nota del pago escribe tu <b>nombre completo</b>.
+              </div>
+
+              <div class="divider"></div>
+
+              <button class="btn primary" type="button" id="finish">Abrir WhatsApp ✔</button>
+              <div class="hint">Se abrirá WhatsApp con tu mensaje listo. (PayPal o Cash App)</div>
+
+              <div class="actions">
+                <button class="btn" type="button" id="back4">← Atrás</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+<!-- PARTE 5/6 FIN -->
+
 
 
 
