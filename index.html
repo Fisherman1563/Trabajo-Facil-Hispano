@@ -137,4 +137,78 @@
     input::placeholder,textarea::placeholder{color:rgba(255,255,255,.35)}
     .hint{margin-top:8px;font-size:12px;color:var(--muted2);line-height:1.4}
 <!-- PARTE 2/6 FIN -->
+<!-- PARTE 3/6 INICIO -->
+    .actions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .actions .btn{width:auto; min-width:140px;}
+    .summary{font-size:13px;color:var(--muted);line-height:1.6;white-space:pre-wrap}
+
+    .faq .q{
+      width:100%;text-align:left;padding:14px;border-radius:16px;background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.94);cursor:pointer;font-weight:900;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .faq .a{
+      margin-top:10px;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);color:var(--muted);line-height:1.6;display:none;
+    }
+    .faqItem+.faqItem{margin-top:10px}
+    .chev{opacity:.7}
+
+    .toast{
+      position:fixed;left:50%;transform:translateX(-50%);bottom:18px;
+      background: rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.16);
+      padding:10px 12px;border-radius:999px;color:rgba(255,255,255,.92);
+      font-size:12px;display:none;gap:10px;align-items:center;z-index:9999;backdrop-filter: blur(10px);
+    }
+    .toast .tDot{width:9px;height:9px;border-radius:50%;background:var(--success);box-shadow:0 0 0 6px rgba(32,210,123,.14)}
+
+    .modal{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.65);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:999999;
+      pointer-events:auto;
+    }
+    .modal .box{
+      width:min(820px,100%);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.32));
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      pointer-events:auto;
+    }
+    .modal .mhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+    .modal .mbody{padding:16px}
+    .lockRow{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .lockRow input{flex:1;min-width:220px}
+    pre{margin:0}
+  </style>
+
+  <!-- Uploadcare -->
+  <script>
+    UPLOADCARE_PUBLIC_KEY = "1459c2bb4c6f1bc0451a";
+  </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" id="brandLogo" title="Admin: 5 clics aquí">
+        <div class="logo"></div>
+        <div class="titlebox">
+          <div class="t1">Trabajo Fácil Hispano</div>
+          <div class="t2">CV profesional • Hispanos en USA • PayPal + Cash App + WhatsApp</div>
+        </div>
+      </div>
+      <div class="badge"><span class="dot"></span><span>Disponible hoy</span></div>
+    </header>
+
+    <div class="grid">
+<!-- PARTE 3/6 FIN -->
+
 
