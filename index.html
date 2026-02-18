@@ -479,6 +479,85 @@
         </div>
       </section>
 <!-- PARTE 5/6 FIN -->
+<!-- PARTE 6/6 INICIO -->
+    $("startBtn2").addEventListener("click", showApp);
+    $("startBtn3").addEventListener("click", showApp);
+
+    $("backToLanding").addEventListener("click", showLanding);
+
+    $("next1").addEventListener("click", ()=>{
+      const d = getData();
+      if(valid1(d)) goTo(2);
+    });
+
+    $("back2").addEventListener("click", ()=> goTo(1));
+    $("next2").addEventListener("click", ()=>{
+      const d = getData();
+      if(valid2(d)){
+        $("aiSummary").textContent = makeSummary(d);
+        goTo(3);
+      }
+    });
+
+    $("back3").addEventListener("click", ()=> goTo(2));
+    $("next3").addEventListener("click", ()=>{
+      const d = getData();
+      const paypal = `https://www.paypal.com/paypalme/${CONFIG.PAYPAL_USER}/${CONFIG.PRICE}`;
+      const cashapp = `https://cash.app/$${CONFIG.CASHAPP_CASHTAG}/${CONFIG.PRICE}`;
+      $("paypalBtn").href = paypal;
+      $("cashappBtn").href = cashapp;
+      goTo(4);
+    });
+
+    $("back4").addEventListener("click", ()=> goTo(3));
+
+    $("finish").addEventListener("click", ()=>{
+      const d = getData();
+      window.open(waLink(d), "_blank");
+    });
+
+    // FAQ
+    document.querySelectorAll(".faq .q").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const a = btn.parentElement.querySelector(".a");
+        a.style.display = a.style.display==="block" ? "none" : "block";
+      });
+    });
+
+    // Admin
+    let clicks = 0;
+    $("brandLogo").addEventListener("click", ()=>{
+      clicks++;
+      if(clicks >= CONFIG.ADMIN_LOGO_CLICKS){
+        clicks = 0;
+        $("adminModal").style.display="flex";
+      }
+    });
+
+    $("closeAdmin").addEventListener("click", ()=>{
+      $("adminModal").style.display="none";
+      $("adminPanel").classList.add("hidden");
+      $("adminPass").value="";
+    });
+
+    $("unlockBtn").addEventListener("click", ()=>{
+      if($("adminPass").value === CONFIG.ADMIN_PASSWORD){
+        $("adminPanel").classList.remove("hidden");
+        $("configDump").textContent = JSON.stringify(CONFIG, null, 2);
+      } else {
+        toast("Contraseña incorrecta.");
+      }
+    });
+
+    $("copyConfigBtn").addEventListener("click", ()=>{
+      navigator.clipboard.writeText(JSON.stringify(CONFIG, null, 2));
+      toast("Copiado.");
+    });
+  </script>
+</body>
+</html>
+<!-- PARTE 6/6 FIN -->
+
 
 
 
