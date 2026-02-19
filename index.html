@@ -3,108 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajo Fácil Hispano – Creador de CV</title>
+    <title>TRABAJO FÁCIL HISPANO – ¡Tu Futuro Comienza Hoy!</title>
 
     <style>
+        :root {
+            --primary-color: #0056b3;
+            --accent-color: #ff8800;
+            --success-color: #28a745;
+            --light-bg: #f8f9fa;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #2d3436;
+            min-height: 100vh;
         }
 
         header {
-            background: #007bff;
+            background: var(--primary-color);
+            background: linear-gradient(to right, #00416a, #e7e9bb); /* Gradiente profesional */
             color: white;
-            padding: 30px 20px;
+            padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .container {
-            max-width: 700px;
-            margin: 30px auto;
+            max-width: 650px;
+            margin: -40px auto 50px; /* Sube la caja para que muerda el encabezado */
             background: white;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        h2 { text-align: center; color: #007bff; }
+        .trust-badge {
+            text-align: center;
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-        .step { display: none; }
+        h2 { 
+            text-align: center; 
+            color: var(--primary-color); 
+            font-size: 24px;
+            margin-bottom: 30px; 
+        }
+
+        .step { display: none; animation: fadeIn 0.5s; }
         .step.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         label {
             font-weight: 600;
             display: block;
             margin-top: 20px;
-            margin-bottom: 5px;
+            color: #444;
         }
 
-        input, textarea, select {
+        input, textarea {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: 2px solid #eee;
             box-sizing: border-box;
             font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
         }
 
         .file-upload-box {
-            margin-top: 20px;
-            padding: 20px;
-            border: 2px dashed #007bff;
-            background: #f8fbff;
-            border-radius: 10px;
+            margin-top: 25px;
+            padding: 30px;
+            border: 2px dashed var(--accent-color);
+            background: #fff9f2;
+            border-radius: 15px;
             text-align: center;
         }
 
         .buttons {
-            margin-top: 30px;
+            margin-top: 40px;
             display: flex;
-            justify-content: space-between;
-            gap: 10px;
+            gap: 15px;
         }
 
-        button, .submit-btn {
-            flex: 1;
-            padding: 15px;
+        button {
+            flex: 2;
+            padding: 18px;
             border: none;
-            background: #007bff;
+            background: var(--primary-color);
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.3s;
+            box-shadow: 0 4px 10px rgba(0,86,179,0.3);
+            transition: all 0.3s;
         }
 
-        button:hover { background: #0056b3; }
-        .btn-back { background: #6c757d; }
-        .btn-back:hover { background: #5a6268; }
-
-        .summary-box {
-            background: #fdfdfd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border-left: 5px solid #007bff;
-            white-space: pre-wrap;
-            line-height: 1.6;
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,86,179,0.4);
+            background: #004494;
         }
+
+        .btn-back {
+            flex: 1;
+            background: #ecf0f1;
+            color: #7f8c8d;
+        }
+
+        .btn-back:hover { background: #bdc3c7; color: #2d3436; }
 
         .whatsapp-btn {
             display: block;
             background: #25D366;
             color: white;
             text-align: center;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 10px;
+            font-size: 18px;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(37,211,102,0.3);
+        }
+
+        .summary-box {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid var(--primary-color);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #b2bec3;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -112,77 +184,84 @@
 
 <header>
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>Tu éxito profesional empieza aquí</p>
+    <p>¡No busques más! Aquí te conectamos con las mejores oportunidades laborales.</p>
 </header>
 
 <div class="container">
+    <div class="trust-badge">🔒 Conexión Segura - Reclutamiento 2024</div>
+    
     <form action="https://formspree.io/f/xbdaalww" method="POST" enctype="multipart/form-data" id="cvForm">
         
         <div class="step active" id="step1">
-            <h2>Datos de Contacto</h2>
-            <label>Nombre Completo</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Ej. Juan Pérez" required>
+            <h2>Paso 1: ¿A quién vamos a recomendar?</h2>
+            <p style="text-align:center; color:#666;">Queremos conocerte. Tus datos están a salvo con nosotros.</p>
+            
+            <label>Nombre y Apellidos</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Ej. Juan Manuel Pérez" required>
 
-            <label>Teléfono</label>
-            <input type="tel" name="telefono" id="telefono" placeholder="Ej. +1 234 567 890" required>
+            <label>WhatsApp o Teléfono</label>
+            <input type="tel" name="telefono" id="telefono" placeholder="+1 (000) 000-0000" required>
 
             <label>Correo Electrónico</label>
-            <input type="email" name="email" id="correo" placeholder="correo@ejemplo.com" required>
+            <input type="email" name="email" id="correo" placeholder="tu@email.com" required>
 
-            <label>Ciudad y Estado</label>
-            <input type="text" name="ubicacion" id="ciudad" placeholder="Ej. Miami, FL">
+            <label>¿Dónde te encuentras?</label>
+            <input type="text" name="ubicacion" id="ciudad" placeholder="Ciudad y Estado">
 
             <div class="buttons">
-                <button type="button" onclick="nextStep()">Siguiente</button>
+                <button type="button" onclick="nextStep()">¡Continuar con mi éxito! →</button>
             </div>
         </div>
 
         <div class="step" id="step2">
-            <h2>Experiencia y CV</h2>
-            <label>Resumen de Experiencia Laboral</label>
-            <textarea name="experiencia" id="experiencia" rows="5" placeholder="Cuéntanos brevemente dónde has trabajado..."></textarea>
+            <h2>Paso 2: Tu talento profesional</h2>
+            
+            <label>Cuéntanos un poco de tu experiencia</label>
+            <textarea name="experiencia" id="experiencia" rows="4" placeholder="Dinos tus últimos 2 trabajos o en qué eres experto..."></textarea>
 
             <div class="file-upload-box">
-                <label style="margin-top:0;">¿Ya tienes un CV listo? (Opcional)</label>
-                <p style="font-size: 14px; color: #666;">Sube tu archivo PDF o Word.</p>
+                <label style="color: var(--accent-color); font-size: 18px;">¿Ya tienes un CV listo?</label>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Adjuntar tu archivo PDF acelera tu contratación en un 80%.</p>
                 <input type="file" name="archivo_cv" accept=".pdf,.doc,.docx">
             </div>
 
             <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
-                <button type="button" onclick="nextStep()">Siguiente</button>
+                <button type="button" class="btn-back" onclick="prevStep()">Volver</button>
+                <button type="button" onclick="nextStep()">Ya casi terminamos →</button>
             </div>
         </div>
 
         <div class="step" id="step3">
-            <h2>Confirmar Información</h2>
-            <div class="summary-box" id="summaryBox">
-                Los datos aparecerán aquí...
-            </div>
+            <h2>¡Excelente! Revisa tu información</h2>
+            <p style="text-align:center;">Asegúrate de que todo esté correcto para que los reclutadores te encuentren.</p>
+            
+            <div class="summary-box" id="summaryBox"></div>
 
             <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
-                <button type="button" onclick="generateSummary()">Confirmar Datos</button>
+                <button type="button" class="btn-back" onclick="prevStep()">Editar</button>
+                <button type="button" onclick="generateSummary()">Confirmar Datos ✅</button>
             </div>
         </div>
 
         <div class="step" id="step4">
-            <h2>¡Todo listo!</h2>
-            <p>Elige cómo quieres enviarnos tu información:</p>
+            <h2>¡Último paso! Envía tu perfil</h2>
+            <p style="text-align:center; font-size: 18px; color: #2d3436;">Elige tu opción de envío preferida:</p>
             
-            <button type="submit" style="background: #007bff; width: 100%;">
-                Enviar CV al Sistema (Email)
+            <button type="submit" style="background: var(--primary-color); width: 100%; border-bottom: 4px solid #003366;">
+                🚀 ENVIAR A REVISIÓN PROFESIONAL
             </button>
 
-            <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #666;">— O —</p>
+            <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #95a5a6;">O TAMBIÉN POR</p>
 
             <a id="whatsappLink" class="whatsapp-btn" target="_blank">
-                Enviar Resumen por WhatsApp
+                💬 ENVIAR POR WHATSAPP
             </a>
 
             <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
+                <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
             </div>
+            
+            <p class="footer-note">Al enviar, aceptas que procesemos tus datos para fines de reclutamiento laboral.</p>
         </div>
 
     </form>
@@ -194,7 +273,7 @@ let currentStep = 1;
 function showStep(step) {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     document.getElementById("step" + step).classList.add('active');
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function nextStep() {
@@ -210,9 +289,9 @@ function prevStep() {
 function generateSummary() {
     const nombre = document.getElementById("nombre").value;
     const telefono = document.getElementById("telefono").value;
-    const experiencia = document.getElementById("experiencia").value || "Se adjuntó archivo digital";
+    const experiencia = document.getElementById("experiencia").value || "Archivo digital adjunto";
 
-    const resumen = `SOLICITUD DE CV - TRABAJO FÁCIL HISPANO\n\nNombre: ${nombre}\nTeléfono: ${telefono}\nExperiencia: ${experiencia}`;
+    const resumen = `SOLICITUD DE CV - TRABAJO FÁCIL HISPANO\n\n👤 NOMBRE: ${nombre}\n📞 TEL: ${telefono}\n💼 EXP: ${experiencia}`;
 
     document.getElementById("summaryBox").innerText = resumen;
 
@@ -225,8 +304,3 @@ function generateSummary() {
 
 </body>
 </html>
-
-
-
-
-
