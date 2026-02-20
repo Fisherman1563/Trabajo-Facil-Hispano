@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRABAJO FÁCIL HISPANO – Tu Éxito Profesional</title>
+    <title>TRABAJO FÁCIL HISPANO</title>
 
     <style>
         :root {
@@ -15,179 +15,112 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            margin: 0;
-            padding: 0;
-            color: #2d3436;
-            min-height: 100vh;
+            margin: 0; padding: 0; color: #2d3436; min-height: 100vh;
         }
 
         header {
             background: linear-gradient(to right, #00416a, #e7e9bb);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer; /* Permite los clics invisibles */
+            color: white; padding: 50px 20px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            user-select: none; /* Evita que el texto se seleccione al hacer clic rápido */
-        }
+        header h1 { margin: 0; font-size: 30px; text-transform: uppercase; user-select: none; }
 
         .container {
-            max-width: 650px;
-            margin: -30px auto 50px;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
+            max-width: 650px; margin: -30px auto 50px;
+            background: white; padding: 40px; border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        h2 { text-align: center; color: var(--primary-color); font-size: 22px; margin-bottom: 25px; }
+        h2 { text-align: center; color: var(--primary-color); font-size: 22px; }
 
         .step { display: none; animation: fadeIn 0.4s; }
         .step.active { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         label { font-weight: 600; display: block; margin-top: 20px; color: #444; }
 
         input, textarea {
-            width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-            border-radius: 10px;
-            border: 2px solid #eee;
-            box-sizing: border-box;
-            font-size: 16px;
+            width: 100%; padding: 14px; margin-top: 8px;
+            border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px;
         }
 
-        .file-upload-box {
-            margin-top: 25px;
-            padding: 25px;
+        .file-info-box {
+            margin-top: 25px; padding: 20px;
             border: 2px dashed var(--accent-color);
-            background: #fff9f2;
-            border-radius: 15px;
-            text-align: center;
+            background: #fff9f2; border-radius: 15px; text-align: center;
         }
 
-        .or-divider {
-            margin: 25px 0;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: #95a5a6;
-            font-weight: bold;
-        }
-
-        .or-divider::before, .or-divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-        }
+        .or-divider { margin: 25px 0; text-align: center; color: #95a5a6; font-weight: bold; }
 
         .buttons { margin-top: 30px; display: flex; gap: 15px; }
 
         button {
-            flex: 2;
-            padding: 18px;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
+            flex: 2; padding: 18px; border: none;
+            background: var(--primary-color); color: white;
+            font-size: 17px; font-weight: bold; border-radius: 12px;
+            cursor: pointer; transition: 0.3s;
         }
 
         button:hover { background: #004494; transform: translateY(-2px); }
         .btn-back { flex: 1; background: #ecf0f1; color: #7f8c8d; }
 
         .whatsapp-btn {
-            display: block;
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 10px;
+            display: block; background: #25D366; color: white;
+            text-align: center; padding: 18px; border-radius: 12px;
+            text-decoration: none; font-weight: bold; margin-top: 10px;
         }
 
         .summary-box {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 6px solid var(--primary-color);
-            white-space: pre-wrap;
-            margin-bottom: 20px;
+            background: #f9f9f9; padding: 20px; border-radius: 12px;
+            border-left: 6px solid var(--primary-color); white-space: pre-wrap; margin-bottom: 20px;
         }
 
-        /* --- PANEL DE ADMIN: INVISIBLE POR DEFECTO --- */
         #adminPanel {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 95%;
-            max-width: 800px;
-            height: 85vh;
-            background: white;
-            z-index: 9999;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 100px rgba(0,0,0,0.8);
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 95%; max-width: 800px; height: 80vh; background: white;
+            z-index: 9999; padding: 20px; border-radius: 15px; box-shadow: 0 0 100px rgba(0,0,0,0.8);
             overflow-y: auto;
         }
 
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .admin-close { cursor: pointer; font-size: 28px; font-weight: bold; color: #ff0000; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; }
+        .admin-close { cursor: pointer; font-size: 28px; color: red; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f4f4f4; }
     </style>
 </head>
 <body>
 
 <header onclick="checkAdminAccess()">
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>¡El camino más rápido a tu próximo empleo!</p>
+    <p>Profesionalizamos tu perfil laboral</p>
 </header>
 
 <div class="container">
-    <form action="https://formspree.io/f/xbdaalww" method="POST" enctype="multipart/form-data" id="cvForm" onsubmit="saveLead()">
+    <form action="https://formspree.io/f/xbdaalww" method="POST" id="cvForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
-            <h2>Paso 1: Datos de Contacto</h2>
-            <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
-            <input type="tel" name="telefono" id="telefono" placeholder="WhatsApp / Teléfono" required>
-            <input type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
-            <input type="text" name="ubicacion" id="ciudad" placeholder="Ciudad y Estado">
+            <h2>Paso 1: Contacto</h2>
+            <input type="text" name="Nombre" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" name="WhatsApp" id="telefono" placeholder="WhatsApp / Teléfono" required>
+            <input type="email" name="Email" id="correo" placeholder="Email" required>
+            <input type="text" name="Ubicacion" id="ciudad" placeholder="Ciudad, Estado">
             <div class="buttons">
-                <button type="button" onclick="nextStep()">Continuar →</button>
+                <button type="button" onclick="nextStep()">Siguiente →</button>
             </div>
         </div>
 
         <div class="step" id="step2">
-            <h2>Paso 2: Experiencia</h2>
-            <div class="file-upload-box">
-                <label>Subir CV (Foto, PDF o Word)</label>
-                <input type="file" name="archivo_cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+            <h2>Paso 2: Tu Experiencia</h2>
+            <div class="file-info-box">
+                <p style="color: var(--accent-color); font-weight: bold;">¿Tienes una foto o archivo de tu CV?</p>
+                <p style="font-size: 14px;">Para mayor rapidez, podrás adjuntarlo por **WhatsApp** en el último paso.</p>
             </div>
-            <div class="or-divider">O LLENAR MANUALMENTE</div>
-            <textarea name="experiencia" id="experiencia" rows="6" placeholder="Cuéntanos brevemente tu experiencia..."></textarea>
+            <div class="or-divider">O DESCRIBE TU EXPERIENCIA AQUÍ</div>
+            <textarea name="Experiencia_Manual" id="experiencia" rows="6" placeholder="Ej: 5 años en construcción, manejo de maquinaria..."></textarea>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
-                <button type="button" onclick="nextStep()">Siguiente →</button>
+                <button type="button" onclick="nextStep()">Revisar →</button>
             </div>
         </div>
 
@@ -201,10 +134,13 @@
         </div>
 
         <div class="step" id="step4">
-            <h2>¡Listo! Envía tu información</h2>
-            <button type="submit">🚀 ENVIAR AL SISTEMA</button>
-            <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #95a5a6;">— TAMBIÉN PUEDES —</p>
-            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 ENVIAR POR WHATSAPP</a>
+            <h2>Paso 4: Envío Final</h2>
+            <button type="submit">🚀 ENVIAR DATOS POR EMAIL</button>
+            <p style="text-align:center; margin: 20px 0; color: #95a5a6; font-weight: bold;">— RECOMENDADO —</p>
+            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 ENVIAR Y ADJUNTAR ARCHIVO</a>
+            <p style="font-size: 12px; text-align: center; margin-top: 10px; color: #666;">
+                Usa el botón verde para enviarnos tu foto o PDF directamente.
+            </p>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
             </div>
@@ -214,23 +150,16 @@
 
 <div id="adminPanel">
     <div class="admin-header">
-        <h3>Panel Administrativo - Leads Recientes</h3>
+        <h3>Admin - Clientes LuciA</h3>
         <span class="admin-close" onclick="closeAdmin()">×</span>
     </div>
-    <div id="adminContent">
-        <table id="leadsTable">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Ciudad</th>
-                </tr>
-            </thead>
-            <tbody id="leadsTableBody"></tbody>
-        </table>
-        <button onclick="clearLeads()" style="background:red; width: auto; padding: 10px; margin-top:20px;">Vaciar Lista Local</button>
-    </div>
+    <table id="leadsTable">
+        <thead>
+            <tr><th>Fecha</th><th>Nombre</th><th>Teléfono</th><th>Ciudad</th></tr>
+        </thead>
+        <tbody id="leadsTableBody"></tbody>
+    </table>
+    <button onclick="clearLeads()" style="background:red; margin-top:20px;">Borrar Todo</button>
 </div>
 
 <script>
@@ -250,26 +179,23 @@ function prevStep() { currentStep--; showStep(currentStep); }
 function generateSummary() {
     const nombre = document.getElementById("nombre").value;
     const tel = document.getElementById("telefono").value;
-    const exp = document.getElementById("experiencia").value || "Archivo adjunto enviado.";
-    const resumen = `SOLICITUD: TRABAJO FÁCIL HISPANO\n\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
+    const exp = document.getElementById("experiencia").value || "Enviará archivo por WhatsApp.";
+    const resumen = `NUEVA SOLICITUD CV\n\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
     document.getElementById("summaryBox").innerText = resumen;
-    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + encodeURIComponent(resumen);
+    
+    // Aquí el cliente te enviará el texto y ya queda el chat abierto para que adjunte la foto
+    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + encodeURIComponent(resumen + "\n\n(Adjunto mi archivo a continuación)");
     nextStep();
 }
 
-// SEGURIDAD DEL PANEL ADMIN
 function checkAdminAccess() {
     clickCount++;
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-
     if (clickCount === 5) {
-        const pass = prompt("Acceso Protegido. Ingrese Contraseña:");
-        if (pass === "LuciA1909$") {
-            openAdmin();
-        } else if (pass !== null) {
-            alert("Contraseña incorrecta.");
-        }
+        const pass = prompt("Clave Admin:");
+        if (pass === "LuciA1909$") openAdmin();
+        else alert("Error");
         clickCount = 0;
     }
 }
@@ -295,10 +221,7 @@ function saveLead() {
 }
 
 function clearLeads() {
-    if(confirm("¿Estás seguro de que quieres borrar el historial local?")) {
-        localStorage.removeItem("leads");
-        openAdmin();
-    }
+    if(confirm("¿Borrar?")) { localStorage.removeItem("leads"); openAdmin(); }
 }
 </script>
 </body>
