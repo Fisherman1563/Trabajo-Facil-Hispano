@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRABAJO FÁCIL HISPANO – Envía tu perfil profesional</title>
+    <title>TRABAJO FÁCIL HISPANO – Tu Éxito Profesional</title>
 
     <style>
         :root {
             --primary-color: #0056b3;
             --accent-color: #ff8800;
-            --success-color: #28a745;
             --light-bg: #f8f9fa;
         }
 
@@ -28,7 +27,7 @@
             padding: 50px 20px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
+            cursor: pointer; /* Permite los clics invisibles */
         }
 
         header h1 {
@@ -37,7 +36,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            user-select: none;
+            user-select: none; /* Evita que el texto se seleccione al hacer clic rápido */
         }
 
         .container {
@@ -131,26 +130,26 @@
             margin-bottom: 20px;
         }
 
-        /* PANEL DE ADMIN TOTALMENTE OCULTO */
+        /* --- PANEL DE ADMIN: INVISIBLE POR DEFECTO --- */
         #adminPanel {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
+            width: 95%;
             max-width: 800px;
-            height: 80vh;
+            height: 85vh;
             background: white;
             z-index: 9999;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 0 100px rgba(0,0,0,0.7);
+            box-shadow: 0 0 100px rgba(0,0,0,0.8);
             overflow-y: auto;
         }
 
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .admin-close { cursor: pointer; font-size: 24px; font-weight: bold; color: red; }
+        .admin-close { cursor: pointer; font-size: 28px; font-weight: bold; color: #ff0000; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
@@ -161,56 +160,51 @@
 
 <header onclick="checkAdminAccess()">
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>¡Tu camino directo a una mejor oportunidad laboral!</p>
+    <p>¡El camino más rápido a tu próximo empleo!</p>
 </header>
 
 <div class="container">
     <form action="https://formspree.io/f/xbdaalww" method="POST" enctype="multipart/form-data" id="cvForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
-            <h2>Paso 1: Información de Contacto</h2>
-            <label>Nombre y Apellidos</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Ej. Juan Pérez" required>
-            <label>WhatsApp o Teléfono</label>
-            <input type="tel" name="telefono" id="telefono" placeholder="Ej. +1 (000) 000-0000" required>
-            <label>Correo Electrónico</label>
-            <input type="email" name="email" id="correo" placeholder="tu@email.com" required>
-            <label>Ciudad y Estado</label>
-            <input type="text" name="ubicacion" id="ciudad" placeholder="Ej. Houston, TX">
+            <h2>Paso 1: Datos de Contacto</h2>
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" name="telefono" id="telefono" placeholder="WhatsApp / Teléfono" required>
+            <input type="email" name="email" id="correo" placeholder="Correo Electrónico" required>
+            <input type="text" name="ubicacion" id="ciudad" placeholder="Ciudad y Estado">
             <div class="buttons">
-                <button type="button" onclick="nextStep()">Siguiente Paso →</button>
+                <button type="button" onclick="nextStep()">Continuar →</button>
             </div>
         </div>
 
         <div class="step" id="step2">
-            <h2>Paso 2: Envía tu historial laboral</h2>
+            <h2>Paso 2: Experiencia</h2>
             <div class="file-upload-box">
-                <label style="color: var(--accent-color); font-size: 18px; margin-top:0;">¿Tienes tu CV listo?</label>
+                <label>Subir CV (Foto, PDF o Word)</label>
                 <input type="file" name="archivo_cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
             </div>
-            <div class="or-divider">O LLÉNALO MANUALMENTE</div>
-            <label>Escribe aquí tu experiencia o habilidades</label>
-            <textarea name="experiencia" id="experiencia" rows="6" placeholder="Cuéntanos qué sabes hacer..."></textarea>
+            <div class="or-divider">O LLENAR MANUALMENTE</div>
+            <textarea name="experiencia" id="experiencia" rows="6" placeholder="Cuéntanos brevemente tu experiencia..."></textarea>
             <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Volver</button>
-                <button type="button" onclick="nextStep()">Revisar mis datos →</button>
+                <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
+                <button type="button" onclick="nextStep()">Siguiente →</button>
             </div>
         </div>
 
         <div class="step" id="step3">
-            <h2>Paso 3: Confirma tus datos</h2>
+            <h2>Paso 3: Revisión</h2>
             <div class="summary-box" id="summaryBox"></div>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Editar</button>
-                <button type="button" onclick="generateSummary()">Confirmar y Enviar ✅</button>
+                <button type="button" onclick="generateSummary()">Confirmar ✅</button>
             </div>
         </div>
 
         <div class="step" id="step4">
-            <h2>¡Todo listo! Selecciona cómo enviar</h2>
-            <button type="submit">🚀 ENVIAR CV AL SISTEMA (RECOMENDADO)</button>
-            <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #95a5a6;">O HABLA CON NOSOTROS AHORA</p>
-            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 CONTACTAR POR WHATSAPP</a>
+            <h2>¡Listo! Envía tu información</h2>
+            <button type="submit">🚀 ENVIAR AL SISTEMA</button>
+            <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #95a5a6;">— TAMBIÉN PUEDES —</p>
+            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 ENVIAR POR WHATSAPP</a>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
             </div>
@@ -220,22 +214,22 @@
 
 <div id="adminPanel">
     <div class="admin-header">
-        <h3>Panel de Control - Clientes Recientes</h3>
+        <h3>Panel Administrativo - Leads Recientes</h3>
         <span class="admin-close" onclick="closeAdmin()">×</span>
     </div>
     <div id="adminContent">
-        <table>
+        <table id="leadsTable">
             <thead>
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre</th>
                     <th>Teléfono</th>
-                    <th>Ubicación</th>
+                    <th>Ciudad</th>
                 </tr>
             </thead>
             <tbody id="leadsTableBody"></tbody>
         </table>
-        <button onclick="clearLeads()" style="background: red; margin-top: 20px; font-size: 12px; padding: 10px;">Borrar Historial Local</button>
+        <button onclick="clearLeads()" style="background:red; width: auto; padding: 10px; margin-top:20px;">Vaciar Lista Local</button>
     </div>
 </div>
 
@@ -255,60 +249,57 @@ function prevStep() { currentStep--; showStep(currentStep); }
 
 function generateSummary() {
     const nombre = document.getElementById("nombre").value;
-    const telefono = document.getElementById("telefono").value;
-    const experiencia = document.getElementById("experiencia").value || "Archivo enviado.";
-    const resumen = `SOLICITUD DE TRABAJO - TRABAJO FÁCIL HISPANO\n\n👤 NOMBRE: ${nombre}\n📞 TEL: ${telefono}\n💼 EXP: ${experiencia}`;
+    const tel = document.getElementById("telefono").value;
+    const exp = document.getElementById("experiencia").value || "Archivo adjunto enviado.";
+    const resumen = `SOLICITUD: TRABAJO FÁCIL HISPANO\n\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
     document.getElementById("summaryBox").innerText = resumen;
-    const mensaje = encodeURIComponent(resumen);
-    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + mensaje;
+    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + encodeURIComponent(resumen);
     nextStep();
 }
 
+// SEGURIDAD DEL PANEL ADMIN
 function checkAdminAccess() {
     clickCount++;
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
 
     if (clickCount === 5) {
-        const pass = prompt("Introduce la clave de acceso:");
+        const pass = prompt("Acceso Protegido. Ingrese Contraseña:");
         if (pass === "LuciA1909$") {
             openAdmin();
-        } else {
-            alert("Acceso denegado.");
+        } else if (pass !== null) {
+            alert("Contraseña incorrecta.");
         }
         clickCount = 0;
     }
 }
 
 function openAdmin() {
-    const panel = document.getElementById("adminPanel");
     const tableBody = document.getElementById("leadsTableBody");
     const leads = JSON.parse(localStorage.getItem("leads") || "[]");
-    tableBody.innerHTML = leads.map(l => `<tr><td>${l.date}</td><td>${l.nombre}</td><td>${l.telefono}</td><td>${l.ubicacion}</td></tr>`).join('');
-    panel.style.display = "block";
+    tableBody.innerHTML = leads.map(l => `<tr><td>${l.date}</td><td>${l.nombre}</td><td>${l.telefono}</td><td>${l.ciudad}</td></tr>`).join('');
+    document.getElementById("adminPanel").style.display = "block";
 }
 
 function closeAdmin() { document.getElementById("adminPanel").style.display = "none"; }
 
 function saveLead() {
     const leads = JSON.parse(localStorage.getItem("leads") || "[]");
-    const newLead = {
+    leads.unshift({
         date: new Date().toLocaleDateString(),
         nombre: document.getElementById("nombre").value,
         telefono: document.getElementById("telefono").value,
-        ubicacion: document.getElementById("ciudad").value
-    };
-    leads.unshift(newLead);
+        ciudad: document.getElementById("ciudad").value
+    });
     localStorage.setItem("leads", JSON.stringify(leads.slice(0, 50)));
 }
 
 function clearLeads() {
-    if(confirm("¿Seguro que quieres borrar la lista local?")) {
+    if(confirm("¿Estás seguro de que quieres borrar el historial local?")) {
         localStorage.removeItem("leads");
         openAdmin();
     }
 }
 </script>
-
 </body>
 </html>
