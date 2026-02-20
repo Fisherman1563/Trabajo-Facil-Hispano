@@ -28,6 +28,7 @@
             padding: 50px 20px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
         }
 
         header h1 {
@@ -36,6 +37,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            user-select: none;
         }
 
         .container {
@@ -90,9 +92,6 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .or-divider:not(:empty)::before { margin-right: .5em; }
-        .or-divider:not(:empty)::after { margin-left: .5em; }
-
         .buttons { margin-top: 30px; display: flex; gap: 15px; }
 
         button {
@@ -105,12 +104,10 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,86,179,0.2);
             transition: 0.3s;
         }
 
         button:hover { background: #004494; transform: translateY(-2px); }
-
         .btn-back { flex: 1; background: #ecf0f1; color: #7f8c8d; }
 
         .whatsapp-btn {
@@ -123,11 +120,7 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(37,211,102,0.2);
-            transition: 0.3s;
         }
-
-        .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
 
         .summary-box {
             background: #f9f9f9;
@@ -138,42 +131,52 @@
             margin-bottom: 20px;
         }
 
-        .info-next-steps {
-            background: #eef9f1;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 10px;
+        /* PANEL DE ADMIN TOTALMENTE OCULTO */
+        #adminPanel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            background: white;
+            z-index: 9999;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.7);
+            overflow-y: auto;
         }
+
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .admin-close { cursor: pointer; font-size: 24px; font-weight: bold; color: red; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
     </style>
 </head>
 <body>
 
-<header>
+<header onclick="checkAdminAccess()">
     <h1>TRABAJO FÁCIL HISPANO</h1>
     <p>¡Tu camino directo a una mejor oportunidad laboral!</p>
 </header>
 
 <div class="container">
-    <form action="https://formspree.io/f/xbdaalww" method="POST" enctype="multipart/form-data" id="cvForm">
+    <form action="https://formspree.io/f/xbdaalww" method="POST" enctype="multipart/form-data" id="cvForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
             <h2>Paso 1: Información de Contacto</h2>
             <label>Nombre y Apellidos</label>
             <input type="text" name="nombre" id="nombre" placeholder="Ej. Juan Pérez" required>
-
-            <label>WhatsApp o Teléfono (Donde te llamaremos)</label>
+            <label>WhatsApp o Teléfono</label>
             <input type="tel" name="telefono" id="telefono" placeholder="Ej. +1 (000) 000-0000" required>
-
             <label>Correo Electrónico</label>
             <input type="email" name="email" id="correo" placeholder="tu@email.com" required>
-
             <label>Ciudad y Estado</label>
             <input type="text" name="ubicacion" id="ciudad" placeholder="Ej. Houston, TX">
-
             <div class="buttons">
                 <button type="button" onclick="nextStep()">Siguiente Paso →</button>
             </div>
@@ -181,18 +184,13 @@
 
         <div class="step" id="step2">
             <h2>Paso 2: Envía tu historial laboral</h2>
-            
             <div class="file-upload-box">
                 <label style="color: var(--accent-color); font-size: 18px; margin-top:0;">¿Tienes tu CV listo?</label>
-                <p style="font-size: 14px; color: #666;">Sube tu archivo (PDF, Word o Foto del CV).</p>
                 <input type="file" name="archivo_cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
             </div>
-
             <div class="or-divider">O LLÉNALO MANUALMENTE</div>
-
             <label>Escribe aquí tu experiencia o habilidades</label>
-            <textarea name="experiencia" id="experiencia" rows="6" placeholder="Cuéntanos dónde has trabajado y qué sabes hacer..."></textarea>
-
+            <textarea name="experiencia" id="experiencia" rows="6" placeholder="Cuéntanos qué sabes hacer..."></textarea>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Volver</button>
                 <button type="button" onclick="nextStep()">Revisar mis datos →</button>
@@ -202,11 +200,6 @@
         <div class="step" id="step3">
             <h2>Paso 3: Confirma tus datos</h2>
             <div class="summary-box" id="summaryBox"></div>
-            
-            <div class="info-next-steps">
-                📍 <strong>Atención:</strong> Revisaremos tu información. Si calificas, te contactaremos vía <strong>WhatsApp o Llamada</strong> en un plazo de 24 a 48 horas.
-            </div>
-
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Editar</button>
                 <button type="button" onclick="generateSummary()">Confirmar y Enviar ✅</button>
@@ -214,30 +207,42 @@
         </div>
 
         <div class="step" id="step4">
-            <h2>¡Casi terminamos! Elige el medio</h2>
-            <p style="text-align:center; color: #666;">Selecciona una opción para completar tu registro:</p>
-            
-            <button type="submit" style="background: var(--primary-color); width: 100%;">
-                🚀 ENVIAR CV AL SISTEMA (RECOMENDADO)
-            </button>
-            <p style="font-size: 12px; color: #7f8c8d; text-align: center; margin-top: 5px;">Recibirás respuesta oficial por WhatsApp o Llamada.</p>
-
+            <h2>¡Todo listo! Selecciona cómo enviar</h2>
+            <button type="submit">🚀 ENVIAR CV AL SISTEMA (RECOMENDADO)</button>
             <p style="text-align:center; margin: 20px 0; font-weight: bold; color: #95a5a6;">O HABLA CON NOSOTROS AHORA</p>
-
-            <a id="whatsappLink" class="whatsapp-btn" target="_blank">
-                💬 CONTACTAR POR WHATSAPP
-            </a>
-
+            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 CONTACTAR POR WHATSAPP</a>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
             </div>
         </div>
-
     </form>
+</div>
+
+<div id="adminPanel">
+    <div class="admin-header">
+        <h3>Panel de Control - Clientes Recientes</h3>
+        <span class="admin-close" onclick="closeAdmin()">×</span>
+    </div>
+    <div id="adminContent">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Ubicación</th>
+                </tr>
+            </thead>
+            <tbody id="leadsTableBody"></tbody>
+        </table>
+        <button onclick="clearLeads()" style="background: red; margin-top: 20px; font-size: 12px; padding: 10px;">Borrar Historial Local</button>
+    </div>
 </div>
 
 <script>
 let currentStep = 1;
+let clickCount = 0;
+let clickTimer;
 
 function showStep(step) {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -245,30 +250,63 @@ function showStep(step) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function nextStep() {
-    currentStep++;
-    showStep(currentStep);
-}
-
-function prevStep() {
-    currentStep--;
-    showStep(currentStep);
-}
+function nextStep() { currentStep++; showStep(currentStep); }
+function prevStep() { currentStep--; showStep(currentStep); }
 
 function generateSummary() {
     const nombre = document.getElementById("nombre").value;
     const telefono = document.getElementById("telefono").value;
-    const experiencia = document.getElementById("experiencia").value || "Archivo adjunto cargado en el sistema.";
-
-    const resumen = `SOLICITUD DE TRABAJO - TRABAJO FÁCIL HISPANO\n\n👤 NOMBRE: ${nombre}\n📞 TEL: ${telefono}\n💼 EXP: ${experiencia}\n\nQuedo a la espera de su contacto por esta vía para los siguientes pasos.`;
-
+    const experiencia = document.getElementById("experiencia").value || "Archivo enviado.";
+    const resumen = `SOLICITUD DE TRABAJO - TRABAJO FÁCIL HISPANO\n\n👤 NOMBRE: ${nombre}\n📞 TEL: ${telefono}\n💼 EXP: ${experiencia}`;
     document.getElementById("summaryBox").innerText = resumen;
-
-    // EL NÚMERO YA ESTÁ RECTIFICADO AQUÍ (272-447-8793)
     const mensaje = encodeURIComponent(resumen);
     document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + mensaje;
-
     nextStep();
+}
+
+function checkAdminAccess() {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+
+    if (clickCount === 5) {
+        const pass = prompt("Introduce la clave de acceso:");
+        if (pass === "LuciA1909$") {
+            openAdmin();
+        } else {
+            alert("Acceso denegado.");
+        }
+        clickCount = 0;
+    }
+}
+
+function openAdmin() {
+    const panel = document.getElementById("adminPanel");
+    const tableBody = document.getElementById("leadsTableBody");
+    const leads = JSON.parse(localStorage.getItem("leads") || "[]");
+    tableBody.innerHTML = leads.map(l => `<tr><td>${l.date}</td><td>${l.nombre}</td><td>${l.telefono}</td><td>${l.ubicacion}</td></tr>`).join('');
+    panel.style.display = "block";
+}
+
+function closeAdmin() { document.getElementById("adminPanel").style.display = "none"; }
+
+function saveLead() {
+    const leads = JSON.parse(localStorage.getItem("leads") || "[]");
+    const newLead = {
+        date: new Date().toLocaleDateString(),
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        ubicacion: document.getElementById("ciudad").value
+    };
+    leads.unshift(newLead);
+    localStorage.setItem("leads", JSON.stringify(leads.slice(0, 50)));
+}
+
+function clearLeads() {
+    if(confirm("¿Seguro que quieres borrar la lista local?")) {
+        localStorage.removeItem("leads");
+        openAdmin();
+    }
 }
 </script>
 
