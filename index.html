@@ -4,234 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRABAJO FÁCIL HISPANO</title>
-
     <style>
-        :root {
-            --primary-color: #0056b3;
-            --accent-color: #ff8800;
-            --success-color: #25D366;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            margin: 0; padding: 0; color: #2d3436; min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(to right, #00416a, #e7e9bb);
-            color: white; padding: 40px 20px; text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;
-        }
-
-        header h1 { margin: 0; font-size: 28px; text-transform: uppercase; user-select: none; }
-
-        .container {
-            max-width: 600px; margin: -20px auto 50px;
-            background: white; padding: 30px; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        h2 { text-align: center; color: var(--primary-color); margin-bottom: 20px; }
-
-        .step { display: none; animation: fadeIn 0.4s; }
-        .step.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        input, textarea {
-            width: 100%; padding: 15px; margin-top: 10px;
-            border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px;
-        }
-
-        .file-box {
-            margin-top: 20px; padding: 20px;
-            border: 2px dashed var(--accent-color);
-            background: #fff9f2; border-radius: 15px; text-align: center;
-        }
-
-        .or-divider { margin: 20px 0; text-align: center; color: #95a5a6; font-weight: bold; position: relative; }
-
-        .buttons { margin-top: 25px; display: flex; gap: 10px; }
-
-        button {
-            flex: 2; padding: 18px; border: none;
-            background: var(--primary-color); color: white;
-            font-size: 17px; font-weight: bold; border-radius: 12px;
-            cursor: pointer; transition: 0.3s;
-        }
-
-        .btn-back { flex: 1; background: #ecf0f1; color: #7f8c8d; }
-
-        .whatsapp-btn {
-            display: block; background: var(--success-color); color: white;
-            text-align: center; padding: 20px; border-radius: 12px;
-            text-decoration: none; font-weight: bold; margin-top: 15px;
-            font-size: 18px; box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-        }
-
-        .summary-box {
-            background: #f9f9f9; padding: 15px; border-radius: 10px;
-            border-left: 5px solid var(--primary-color); white-space: pre-wrap; margin-bottom: 20px;
-        }
-
-        /* ADMIN PANEL */
-        #adminPanel {
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 700px; height: 70vh; background: white;
-            z-index: 9999; padding: 20px; border-radius: 15px; box-shadow: 0 0 100px rgba(0,0,0,0.8);
-            overflow-y: auto;
-        }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        :root { --primary: #0056b3; --accent: #ff8800; --success: #25D366; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; margin: 0; padding: 0; color: #333; }
+        header { background: linear-gradient(to right, #00416a, #1c92d2); color: white; padding: 40px 20px; text-align: center; cursor: pointer; }
+        .container { max-width: 500px; margin: -20px auto 50px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .step { display: none; } .step.active { display: block; }
+        input, textarea { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+        .file-notice { background: #fff3e0; border: 1px dashed #ff9800; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center; }
+        button { width: 100%; padding: 15px; border: none; background: var(--primary); color: white; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+        .whatsapp-btn { display: block; background: var(--success); color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; font-size: 16px; }
+        .admin-panel { display: none; position: fixed; top: 10%; left: 5%; width: 90%; background: white; z-index: 100; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <header onclick="checkAdminAccess()">
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>Tu futuro laboral empieza aquí</p>
+    <p>Servicio Profesional de CV</p>
 </header>
 
 <div class="container">
-    <form action="https://formspree.io/f/xbdaalww" method="POST" id="cvForm" onsubmit="saveLead()">
+    <form action="https://formspree.io/f/xbdaalww" method="POST" id="mainForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
-            <h2>Paso 1: Contacto</h2>
-            <input type="text" name="Nombre" id="nombre" placeholder="Nombre Completo" required>
-            <input type="tel" name="WhatsApp" id="telefono" placeholder="WhatsApp / Teléfono" required>
-            <input type="email" name="Email" id="correo" placeholder="Correo Electrónico" required>
-            <input type="text" name="Ubicacion" id="ciudad" placeholder="Ciudad, Estado">
-            <div class="buttons">
-                <button type="button" onclick="nextStep()">Siguiente →</button>
-            </div>
+            <h3>Paso 1: Tu Contacto</h3>
+            <input type="text" name="Nombre" id="nombre" placeholder="Nombre completo" required>
+            <input type="tel" name="WhatsApp" id="telefono" placeholder="Número de WhatsApp" required>
+            <input type="text" name="Ciudad" id="ciudad" placeholder="Ciudad y Estado">
+            <button type="button" onclick="nextStep()">Siguiente</button>
         </div>
 
         <div class="step" id="step2">
-            <h2>Paso 2: Tu Experiencia</h2>
-            <div class="file-box">
-                <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 10px;">¿Tienes foto de tu CV?</p>
-                <input type="file" id="archivo_visual" style="font-size: 14px;">
-                <p style="font-size: 12px; color: #666; margin-top: 10px;">Selecciónalo para tenerlo listo.</p>
+            <h3>Paso 2: Tu Experiencia</h3>
+            <textarea name="Resumen_Experiencia" id="experiencia" rows="5" placeholder="Escribe aquí tus últimos trabajos o habilidades..."></textarea>
+            <div class="file-notice">
+                <small>⚠️ <strong>Nota sobre archivos:</strong><br>Para enviarnos tu PDF o Foto, usa el botón de <strong>WhatsApp</strong> en el último paso.</small>
             </div>
-            <div class="or-divider">O ESCRIBE AQUÍ</div>
-            <textarea name="Experiencia_Manual" id="experiencia" rows="5" placeholder="Resume tus trabajos anteriores..."></textarea>
-            <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
-                <button type="button" onclick="nextStep()">Siguiente →</button>
-            </div>
+            <button type="button" onclick="nextStep()">Revisar Datos</button>
         </div>
 
         <div class="step" id="step3">
-            <h2>Paso 3: Confirmar</h2>
-            <div class="summary-box" id="summaryBox"></div>
-            <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Editar</button>
-                <button type="button" onclick="generateSummary()">Confirmar Todo ✅</button>
-            </div>
-        </div>
-
-        <div class="step" id="step4">
-            <h2>Paso 4: Finalizar Envío</h2>
+            <h3>Paso 3: Finalizar</h3>
+            <div id="resumen" style="background:#f9f9f9; padding:15px; border-radius:8px; font-size:14px;"></div>
             
-            <button type="submit" style="width: 100%;">🚀 ENVIAR POR EMAIL</button>
+            <button type="submit">1. REGISTRAR POR EMAIL</button>
             
-            <div class="or-divider">O POR WHATSAPP (MÁS RÁPIDO)</div>
+            <p style="text-align:center; margin:15px 0; font-weight:bold;">— Y LUEGO —</p>
             
-            <a id="whatsappLink" class="whatsapp-btn" target="_blank">
-                💬 ENVIAR Y ADJUNTAR CV
+            <a id="waBtn" class="whatsapp-btn" target="_blank" onclick="generateWALink()">
+                2. ENVIAR CV POR WHATSAPP
             </a>
-            
-            <p style="font-size: 12px; text-align: center; color: #7f8c8d; margin-top: 15px;">
-                Al hacer clic en el botón verde, podrás enviarnos tu foto o archivo directamente.
-            </p>
-
-            <div class="buttons">
-                <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
-            </div>
+            <p style="font-size:11px; color:#666; text-align:center; margin-top:5px;">(Usa este botón para adjuntar tu foto o PDF)</p>
         </div>
     </form>
 </div>
 
-<div id="adminPanel">
-    <div class="admin-header">
-        <h3>Admin - Clientes LuciA</h3>
-        <span style="cursor:pointer; color:red; font-weight:bold;" onclick="closeAdmin()">CERRAR [X]</span>
-    </div>
-    <table id="leadsTable">
-        <thead>
-            <tr><th>Fecha</th><th>Nombre</th><th>WhatsApp</th><th>Ubicación</th></tr>
-        </thead>
-        <tbody id="leadsTableBody"></tbody>
-    </table>
-    <button onclick="clearLeads()" style="background:red; padding:10px; margin-top:20px; width:auto; font-size:12px;">Limpiar Historial</button>
+<div id="adminBox" class="admin-panel">
+    <h3 style="display:flex; justify-content:space-between;">Leads Recientes <span onclick="closeAdmin()" style="color:red; cursor:pointer;">X</span></h3>
+    <div id="adminList" style="max-height:300px; overflow-y:auto; font-size:12px;"></div>
+    <button onclick="localStorage.clear(); location.reload();" style="background:red; font-size:12px;">Borrar Historial Local</button>
 </div>
 
 <script>
-let currentStep = 1;
-let clickCount = 0;
-let clickTimer;
-
-function showStep(step) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    document.getElementById("step" + step).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function nextStep() { currentStep++; showStep(currentStep); }
-function prevStep() { currentStep--; showStep(currentStep); }
-
-function generateSummary() {
-    const nombre = document.getElementById("nombre").value;
-    const tel = document.getElementById("telefono").value;
-    const exp = document.getElementById("experiencia").value || "Enviará archivo adjunto.";
-    
-    const resumen = `NUEVA SOLICITUD CV\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
-    document.getElementById("summaryBox").innerText = resumen;
-    
-    // Configura el link de WhatsApp con el número corregido
-    const textoWA = encodeURIComponent(resumen + "\n\n(Hola, adjunto mi foto/archivo de CV a continuación)");
-    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + textoWA;
-    
-    nextStep();
-}
-
-function checkAdminAccess() {
-    clickCount++;
-    clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-    if (clickCount === 5) {
-        const pass = prompt("Contraseña:");
-        if (pass === "LuciA1909$") openAdmin();
-        else alert("Acceso denegado");
-        clickCount = 0;
+    let step = 1;
+    function nextStep() {
+        if(step === 1) document.getElementById('resumen').innerText = "Nombre: " + document.getElementById('nombre').value + "\nTel: " + document.getElementById('telefono').value;
+        document.getElementById('step'+step).classList.remove('active');
+        step++;
+        document.getElementById('step'+step).classList.add('active');
     }
-}
 
-function openAdmin() {
-    const tableBody = document.getElementById("leadsTableBody");
-    const leads = JSON.parse(localStorage.getItem("leads") || "[]");
-    tableBody.innerHTML = leads.map(l => `<tr><td>${l.date}</td><td>${l.nombre}</td><td>${l.telefono}</td><td>${l.ciudad}</td></tr>`).join('');
-    document.getElementById("adminPanel").style.display = "block";
-}
+    function generateWALink() {
+        const nombre = document.getElementById('nombre').value;
+        const exp = document.getElementById('experiencia').value || "Sin resumen escrito.";
+        const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí te envío mis datos y a continuación te adjunto mi archivo de CV:\n\nExperiencia: " + exp);
+        document.getElementById('waBtn').href = "https://wa.me/12724478793?text=" + msg;
+    }
 
-function closeAdmin() { document.getElementById("adminPanel").style.display = "none"; }
-
-function saveLead() {
-    const leads = JSON.parse(localStorage.getItem("leads") || "[]");
-    leads.unshift({
-        date: new Date().toLocaleDateString(),
-        nombre: document.getElementById("nombre").value,
-        telefono: document.getElementById("telefono").value,
-        ciudad: document.getElementById("ciudad").value
-    });
-    localStorage.setItem("leads", JSON.stringify(leads.slice(0, 50)));
-}
-
-function clearLeads() {
-    if(confirm("¿Borrar historial?")) { localStorage.removeItem("leads"); openAdmin(); }
-}
+    // ADMIN LOGIC
+    let clicks = 0;
+    function checkAdminAccess() {
+        clicks++;
+        if(clicks === 5) {
+            const p = prompt("Clave:");
+            if(p === "LuciA1909$") {
+                const list = JSON.parse(localStorage.getItem('leads') || "[]");
+                document.getElementById('adminList').innerHTML = list.map(l => `<p>${l.fecha} - ${l.n} - ${l.t}</p>`).join('');
+                document.getElementById('adminBox').style.display = 'block';
+            }
+            clicks = 0;
+        }
+        setTimeout(() => clicks = 0, 2000);
+    }
+    function closeAdmin() { document.getElementById('adminBox').style.display = 'none'; }
+    function saveLead() {
+        const leads = JSON.parse(localStorage.getItem('leads') || "[]");
+        leads.unshift({fecha: new Date().toLocaleDateString(), n: document.getElementById('nombre').value, t: document.getElementById('telefono').value});
+        localStorage.setItem('leads', JSON.stringify(leads.slice(0,20)));
+    }
 </script>
-
 </body>
 </html>
