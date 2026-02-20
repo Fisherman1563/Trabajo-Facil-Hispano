@@ -9,7 +9,7 @@
         :root {
             --primary-color: #0056b3;
             --accent-color: #ff8800;
-            --light-bg: #f8f9fa;
+            --success-color: #25D366;
         }
 
         body {
@@ -20,40 +20,38 @@
 
         header {
             background: linear-gradient(to right, #00416a, #e7e9bb);
-            color: white; padding: 50px 20px; text-align: center;
+            color: white; padding: 40px 20px; text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;
         }
 
-        header h1 { margin: 0; font-size: 30px; text-transform: uppercase; user-select: none; }
+        header h1 { margin: 0; font-size: 28px; text-transform: uppercase; user-select: none; }
 
         .container {
-            max-width: 650px; margin: -30px auto 50px;
-            background: white; padding: 40px; border-radius: 20px;
+            max-width: 600px; margin: -20px auto 50px;
+            background: white; padding: 30px; border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        h2 { text-align: center; color: var(--primary-color); font-size: 22px; }
+        h2 { text-align: center; color: var(--primary-color); margin-bottom: 20px; }
 
         .step { display: none; animation: fadeIn 0.4s; }
         .step.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        label { font-weight: 600; display: block; margin-top: 20px; color: #444; }
-
         input, textarea {
-            width: 100%; padding: 14px; margin-top: 8px;
+            width: 100%; padding: 15px; margin-top: 10px;
             border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px;
         }
 
-        .file-info-box {
-            margin-top: 25px; padding: 20px;
+        .file-box {
+            margin-top: 20px; padding: 20px;
             border: 2px dashed var(--accent-color);
             background: #fff9f2; border-radius: 15px; text-align: center;
         }
 
-        .or-divider { margin: 25px 0; text-align: center; color: #95a5a6; font-weight: bold; }
+        .or-divider { margin: 20px 0; text-align: center; color: #95a5a6; font-weight: bold; position: relative; }
 
-        .buttons { margin-top: 30px; display: flex; gap: 15px; }
+        .buttons { margin-top: 25px; display: flex; gap: 10px; }
 
         button {
             flex: 2; padding: 18px; border: none;
@@ -62,38 +60,37 @@
             cursor: pointer; transition: 0.3s;
         }
 
-        button:hover { background: #004494; transform: translateY(-2px); }
         .btn-back { flex: 1; background: #ecf0f1; color: #7f8c8d; }
 
         .whatsapp-btn {
-            display: block; background: #25D366; color: white;
-            text-align: center; padding: 18px; border-radius: 12px;
-            text-decoration: none; font-weight: bold; margin-top: 10px;
+            display: block; background: var(--success-color); color: white;
+            text-align: center; padding: 20px; border-radius: 12px;
+            text-decoration: none; font-weight: bold; margin-top: 15px;
+            font-size: 18px; box-shadow: 0 4px 15px rgba(37,211,102,0.3);
         }
 
         .summary-box {
-            background: #f9f9f9; padding: 20px; border-radius: 12px;
-            border-left: 6px solid var(--primary-color); white-space: pre-wrap; margin-bottom: 20px;
+            background: #f9f9f9; padding: 15px; border-radius: 10px;
+            border-left: 5px solid var(--primary-color); white-space: pre-wrap; margin-bottom: 20px;
         }
 
+        /* ADMIN PANEL */
         #adminPanel {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 95%; max-width: 800px; height: 80vh; background: white;
+            width: 90%; max-width: 700px; height: 70vh; background: white;
             z-index: 9999; padding: 20px; border-radius: 15px; box-shadow: 0 0 100px rgba(0,0,0,0.8);
             overflow-y: auto;
         }
-
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; }
-        .admin-close { cursor: pointer; font-size: 28px; color: red; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     </style>
 </head>
 <body>
 
 <header onclick="checkAdminAccess()">
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>Profesionalizamos tu perfil laboral</p>
+    <p>Tu futuro laboral empieza aquí</p>
 </header>
 
 <div class="container">
@@ -101,9 +98,9 @@
         
         <div class="step active" id="step1">
             <h2>Paso 1: Contacto</h2>
-            <input type="text" name="Nombre" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="text" name="Nombre" id="nombre" placeholder="Nombre Completo" required>
             <input type="tel" name="WhatsApp" id="telefono" placeholder="WhatsApp / Teléfono" required>
-            <input type="email" name="Email" id="correo" placeholder="Email" required>
+            <input type="email" name="Email" id="correo" placeholder="Correo Electrónico" required>
             <input type="text" name="Ubicacion" id="ciudad" placeholder="Ciudad, Estado">
             <div class="buttons">
                 <button type="button" onclick="nextStep()">Siguiente →</button>
@@ -112,35 +109,43 @@
 
         <div class="step" id="step2">
             <h2>Paso 2: Tu Experiencia</h2>
-            <div class="file-info-box">
-                <p style="color: var(--accent-color); font-weight: bold;">¿Tienes una foto o archivo de tu CV?</p>
-                <p style="font-size: 14px;">Para mayor rapidez, podrás adjuntarlo por **WhatsApp** en el último paso.</p>
+            <div class="file-box">
+                <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 10px;">¿Tienes foto de tu CV?</p>
+                <input type="file" id="archivo_visual" style="font-size: 14px;">
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">Selecciónalo para tenerlo listo.</p>
             </div>
-            <div class="or-divider">O DESCRIBE TU EXPERIENCIA AQUÍ</div>
-            <textarea name="Experiencia_Manual" id="experiencia" rows="6" placeholder="Ej: 5 años en construcción, manejo de maquinaria..."></textarea>
+            <div class="or-divider">O ESCRIBE AQUÍ</div>
+            <textarea name="Experiencia_Manual" id="experiencia" rows="5" placeholder="Resume tus trabajos anteriores..."></textarea>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Atrás</button>
-                <button type="button" onclick="nextStep()">Revisar →</button>
+                <button type="button" onclick="nextStep()">Siguiente →</button>
             </div>
         </div>
 
         <div class="step" id="step3">
-            <h2>Paso 3: Revisión</h2>
+            <h2>Paso 3: Confirmar</h2>
             <div class="summary-box" id="summaryBox"></div>
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Editar</button>
-                <button type="button" onclick="generateSummary()">Confirmar ✅</button>
+                <button type="button" onclick="generateSummary()">Confirmar Todo ✅</button>
             </div>
         </div>
 
         <div class="step" id="step4">
-            <h2>Paso 4: Envío Final</h2>
-            <button type="submit">🚀 ENVIAR DATOS POR EMAIL</button>
-            <p style="text-align:center; margin: 20px 0; color: #95a5a6; font-weight: bold;">— RECOMENDADO —</p>
-            <a id="whatsappLink" class="whatsapp-btn" target="_blank">💬 ENVIAR Y ADJUNTAR ARCHIVO</a>
-            <p style="font-size: 12px; text-align: center; margin-top: 10px; color: #666;">
-                Usa el botón verde para enviarnos tu foto o PDF directamente.
+            <h2>Paso 4: Finalizar Envío</h2>
+            
+            <button type="submit" style="width: 100%;">🚀 ENVIAR POR EMAIL</button>
+            
+            <div class="or-divider">O POR WHATSAPP (MÁS RÁPIDO)</div>
+            
+            <a id="whatsappLink" class="whatsapp-btn" target="_blank">
+                💬 ENVIAR Y ADJUNTAR CV
+            </a>
+            
+            <p style="font-size: 12px; text-align: center; color: #7f8c8d; margin-top: 15px;">
+                Al hacer clic en el botón verde, podrás enviarnos tu foto o archivo directamente.
             </p>
+
             <div class="buttons">
                 <button type="button" class="btn-back" onclick="prevStep()">Regresar</button>
             </div>
@@ -151,15 +156,15 @@
 <div id="adminPanel">
     <div class="admin-header">
         <h3>Admin - Clientes LuciA</h3>
-        <span class="admin-close" onclick="closeAdmin()">×</span>
+        <span style="cursor:pointer; color:red; font-weight:bold;" onclick="closeAdmin()">CERRAR [X]</span>
     </div>
     <table id="leadsTable">
         <thead>
-            <tr><th>Fecha</th><th>Nombre</th><th>Teléfono</th><th>Ciudad</th></tr>
+            <tr><th>Fecha</th><th>Nombre</th><th>WhatsApp</th><th>Ubicación</th></tr>
         </thead>
         <tbody id="leadsTableBody"></tbody>
     </table>
-    <button onclick="clearLeads()" style="background:red; margin-top:20px;">Borrar Todo</button>
+    <button onclick="clearLeads()" style="background:red; padding:10px; margin-top:20px; width:auto; font-size:12px;">Limpiar Historial</button>
 </div>
 
 <script>
@@ -179,12 +184,15 @@ function prevStep() { currentStep--; showStep(currentStep); }
 function generateSummary() {
     const nombre = document.getElementById("nombre").value;
     const tel = document.getElementById("telefono").value;
-    const exp = document.getElementById("experiencia").value || "Enviará archivo por WhatsApp.";
-    const resumen = `NUEVA SOLICITUD CV\n\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
+    const exp = document.getElementById("experiencia").value || "Enviará archivo adjunto.";
+    
+    const resumen = `NUEVA SOLICITUD CV\n👤: ${nombre}\n📞: ${tel}\n💼: ${exp}`;
     document.getElementById("summaryBox").innerText = resumen;
     
-    // Aquí el cliente te enviará el texto y ya queda el chat abierto para que adjunte la foto
-    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + encodeURIComponent(resumen + "\n\n(Adjunto mi archivo a continuación)");
+    // Configura el link de WhatsApp con el número corregido
+    const textoWA = encodeURIComponent(resumen + "\n\n(Hola, adjunto mi foto/archivo de CV a continuación)");
+    document.getElementById("whatsappLink").href = "https://wa.me/12724478793?text=" + textoWA;
+    
     nextStep();
 }
 
@@ -193,9 +201,9 @@ function checkAdminAccess() {
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
     if (clickCount === 5) {
-        const pass = prompt("Clave Admin:");
+        const pass = prompt("Contraseña:");
         if (pass === "LuciA1909$") openAdmin();
-        else alert("Error");
+        else alert("Acceso denegado");
         clickCount = 0;
     }
 }
@@ -221,8 +229,9 @@ function saveLead() {
 }
 
 function clearLeads() {
-    if(confirm("¿Borrar?")) { localStorage.removeItem("leads"); openAdmin(); }
+    if(confirm("¿Borrar historial?")) { localStorage.removeItem("leads"); openAdmin(); }
 }
 </script>
+
 </body>
 </html>
