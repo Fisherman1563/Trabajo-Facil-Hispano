@@ -102,11 +102,13 @@
     }
 
     function generateWALink() {
-        const nombre = document.getElementById('nombre').value;
-        const exp = document.getElementById('experiencia').value || "Enviará archivo adjunto.";
-        const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí envío mis datos para mi nuevo CV:\n\nExperiencia: " + exp + "\n\n(Adjunto mi archivo a continuación)");
-        document.getElementById('waBtn').href = "https://wa.me/12724478793?text=" + msg;
-    }
+    const nombre = document.getElementById('nombre').value;
+    const exp = document.getElementById('experiencia').value || "Enviará archivo adjunto.";
+    const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí envío mis datos para mi nuevo CV:\n\nExperiencia: " + exp + "\n\n(Adjunto mi archivo a continuación)");
+    
+    // Usamos api.whatsapp.com que es más compatible para forzar la apertura en Business
+    document.getElementById('waBtn').href = "https://api.whatsapp.com/send?phone=12724478793&text=" + msg;
+}
 
     // ADMIN LOGIC
     let clicks = 0;
@@ -132,3 +134,4 @@
 </script>
 </body>
 </html>
+
