@@ -3,111 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRABAJO FÁCIL HISPANO</title>
+    <title>TRABAJO FÁCIL HISPANO – Servicio Profesional</title>
     <style>
-        :root { --primary: #0056b3; --accent: #ff8800; --success: #25D366; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; margin: 0; padding: 0; color: #333; }
-        header { background: linear-gradient(to right, #00416a, #1c92d2); color: white; padding: 40px 20px; text-align: center; cursor: pointer; }
-        .container { max-width: 500px; margin: -20px auto 50px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .step { display: none; } .step.active { display: block; }
-        input, textarea { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
-        .file-box { border: 2px dashed var(--accent); background: #fff9f2; padding: 20px; border-radius: 10px; margin-top: 15px; text-align: center; }
-        button { width: 100%; padding: 15px; border: none; background: var(--primary); color: white; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 20px; }
-        .whatsapp-btn { display: block; background: var(--success); color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .admin-panel { display: none; position: fixed; top: 10%; left: 5%; width: 90%; background: white; z-index: 100; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border-radius: 10px; }
+        :root { 
+            --primary: #0056b3; 
+            --accent: #ff8800; 
+            --success: #25D366; 
+            --paypal: #003087;
+            --cashapp: #00d084;
+            --dark: #2d3436; 
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 0; color: var(--dark); line-height: 1.6; }
+        
+        header { 
+            background: linear-gradient(135deg, #00416a, #1c92d2); 
+            color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .container { max-width: 550px; margin: -30px auto 50px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .price-tag {
+            background: #fff3e0; border: 2px solid var(--accent); color: #e67e22;
+            padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 25px;
+        }
+
+        h2 { color: var(--primary); text-align: center; margin-top: 0; }
+        p { text-align: center; color: #636e72; font-size: 15px; }
+
+        input { width: 100%; padding: 14px; margin-top: 12px; border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px; }
+        
+        button, .btn-link { 
+            display: block; width: 100%; padding: 18px; border: none; border-radius: 12px; 
+            font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; text-align: center; margin-top: 15px; transition: 0.3s;
+        }
+
+        .btn-next { background: var(--primary); color: white; border-bottom: 4px solid #003d80; }
+        .btn-paypal { background: var(--paypal); color: white; border-bottom: 4px solid #001e54; }
+        .btn-cashapp { background: var(--cashapp); color: white; border-bottom: 4px solid #009e64; }
+        .btn-whatsapp { background: var(--success); color: white; border-bottom: 4px solid #1da851; }
+
+        .info-box { background: #f8f9fa; border-left: 5px solid var(--primary); padding: 15px; margin: 20px 0; font-size: 14px; border-radius: 0 10px 10px 0; }
+        
+        .secure-badge { text-align: center; margin-top: 20px; font-size: 12px; color: #95a5a6; }
     </style>
 </head>
 <body>
 
-<header onclick="checkAdminAccess()">
+<header>
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>Profesionalizamos tu perfil laboral</p>
+    <p>Tu Éxito Profesional Empieza Aquí</p>
 </header>
 
 <div class="container">
+    <div class="price-tag">Total: $25.00 USD</div>
+
     <form action="https://formspree.io/f/xbdaalww" method="POST" id="mainForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
-            <h3>Paso 1: Tu Contacto</h3>
+            <h2>Paso 1: Información de Contacto</h2>
+            <p>Ingresa tus datos para registrar tu solicitud en nuestro sistema.</p>
             <input type="text" name="Nombre" id="nombre" placeholder="Nombre completo" required>
             <input type="tel" name="WhatsApp" id="telefono" placeholder="Número de WhatsApp" required>
-            <input type="text" name="Ciudad" id="ciudad" placeholder="Ciudad y Estado">
-            <button type="button" onclick="nextStep()">Siguiente Paso</button>
+            <input type="text" name="Ubicacion" id="ciudad" placeholder="Ciudad y Estado">
+            
+            <button type="button" class="btn-next" onclick="nextStep()">Continuar al Pago →</button>
         </div>
 
         <div class="step" id="step2">
-            <h3>Paso 2: Tu Experiencia</h3>
-            <div class="file-box">
-                <label style="font-weight: bold; color: var(--accent);">¿Tienes tu CV en foto o PDF?</label>
-                <p style="font-size: 11px; color: #666;">Selecciónalo aquí para tenerlo listo:</p>
-                <input type="file" id="archivo_visual">
-            </div>
-            <textarea name="Resumen_Experiencia" id="experiencia" rows="5" placeholder="O escribe aquí tu experiencia..." style="margin-top:15px;"></textarea>
-            <button type="button" onclick="nextStep()">Revisar Todo</button>
-        </div>
+            <h2>Paso 2: Pago Seguro</h2>
+            <p>Selecciona tu método de pago preferido para activar el servicio de $25.</p>
 
-        <div class="step" id="step3">
-            <h3>Paso 3: Envío Final</h3>
-            <div id="resumen" style="background:#f9f9f9; padding:15px; border-radius:8px; font-size:14px; margin-bottom: 15px;"></div>
-            
-            <p style="font-size: 13px; color: #d9534f; font-weight: bold;">IMPORTANTE: Debes completar los dos botones:</p>
-            
-            <button type="submit">1️⃣ REGISTRAR MIS DATOS (EMAIL)</button>
-            
-            <a id="waBtn" class="whatsapp-btn" target="_blank" onclick="generateWALink()">
-                2️⃣ ENVIAR ARCHIVO POR WHATSAPP
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=lucia.m.guerrero@gmail.com&item_name=Servicio+CV+Profesional+Hispano&amount=25.00&currency_code=USD" 
+               class="btn-link btn-paypal" target="_blank">
+                Pagar con PayPal
             </a>
-            
-            <p style="font-size: 11px; color: #666; text-align: center; margin-top: 10px;">
-                *Al presionar el botón verde, adjunta tu foto o PDF en el chat.
-            </p>
+
+            <a href="https://cash.app/$luciaguerrero1909/25" 
+               class="btn-link btn-cashapp" target="_blank">
+                Pagar con Cash App
+            </a>
+
+            <div class="info-box">
+                <strong>¿Qué hacer después de pagar?</strong><br>
+                Una vez realizado el pago, presiona el botón de abajo para enviarnos tu archivo (PDF o Foto) y el comprobante por WhatsApp.
+            </div>
+
+            <button type="submit" class="btn-whatsapp" onclick="openWhatsApp(event)">
+                FINALIZAR Y ADJUNTAR CV
+            </button>
         </div>
     </form>
-</div>
 
-<div id="adminBox" class="admin-panel">
-    <h3>Admin - Clientes <span onclick="closeAdmin()" style="float:right; color:red; cursor:pointer;">X</span></h3>
-    <div id="adminList"></div>
-    <button onclick="localStorage.clear(); location.reload();" style="background:red;">Limpiar Lista</button>
+    <div class="secure-badge">🔒 Pago Seguro y Encriptado</div>
 </div>
 
 <script>
-    let step = 1;
     function nextStep() {
-        if(step === 1) document.getElementById('resumen').innerText = "Nombre: " + document.getElementById('nombre').value + "\nTel: " + document.getElementById('telefono').value;
-        document.getElementById('step'+step).classList.remove('active');
-        step++;
-        document.getElementById('step'+step).classList.add('active');
-    }
-
-    function generateWALink() {
-        const nombre = document.getElementById('nombre').value;
-        const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí envío mis datos y a continuación ADJUNTO MI ARCHIVO de CV:");
-        // Esta URL es más potente para forzar la apertura de la App
-        document.getElementById('waBtn').href = "https://api.whatsapp.com/send?phone=12724478793&text=" + msg;
-    }
-
-    // ADMIN
-    let clicks = 0;
-    function checkAdminAccess() {
-        clicks++;
-        if(clicks === 5) {
-            const p = prompt("Clave:");
-            if(p === "LuciA1909$") {
-                const list = JSON.parse(localStorage.getItem('leads') || "[]");
-                document.getElementById('adminList').innerHTML = list.map(l => `<p>${l.fecha} - ${l.n}</p>`).join('');
-                document.getElementById('adminBox').style.display = 'block';
-            }
-            clicks = 0;
+        const n = document.getElementById('nombre').value;
+        const t = document.getElementById('telefono').value;
+        if(n && t) {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            alert("Por favor, completa tu nombre y número de teléfono.");
         }
-        setTimeout(() => clicks = 0, 2000);
     }
-    function closeAdmin() { document.getElementById('adminBox').style.display = 'none'; }
+
+    function openWhatsApp(e) {
+        const nombre = document.getElementById('nombre').value;
+        
+        // Mensaje que recibirás en tu WhatsApp Business
+        const mensaje = encodeURIComponent(
+            "¡Hola Trabajo Fácil Hispano!\n\n" +
+            "He registrado mis datos y estoy listo para procesar mi CV ($25).\n" +
+            "Cliente: " + nombre + "\n\n" +
+            "A continuación adjunto mi comprobante y el archivo para mi nuevo perfil profesional."
+        );
+
+        const waUrl = "https://api.whatsapp.com/send?phone=12724478793&text=" + mensaje;
+        
+        // Abrimos el WhatsApp en una pestaña nueva después de un pequeño delay
+        setTimeout(() => {
+            window.open(waUrl, '_blank');
+        }, 800);
+    }
+
     function saveLead() {
+        // Esta función guarda localmente para tu panel de Admin (LuciA1909$)
         const leads = JSON.parse(localStorage.getItem('leads') || "[]");
-        leads.unshift({fecha: new Date().toLocaleDateString(), n: document.getElementById('nombre').value});
-        localStorage.setItem('leads', JSON.stringify(leads.slice(0,30)));
+        leads.unshift({
+            fecha: new Date().toLocaleDateString(),
+            n: document.getElementById('nombre').value,
+            t: document.getElementById('telefono').value
+        });
+        localStorage.setItem('leads', JSON.stringify(leads.slice(0,50)));
     }
 </script>
+
 </body>
 </html>
