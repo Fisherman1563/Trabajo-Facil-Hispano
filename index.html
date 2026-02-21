@@ -3,147 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRABAJO FÁCIL HISPANO – Servicio Profesional</title>
+    <title>Trabajo Fácil Hispano | CV Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { 
-            --primary: #0056b3; 
-            --accent: #ff8800; 
-            --success: #25D366; 
-            --paypal: #003087;
-            --cashapp: #00d084;
-            --dark: #2d3436; 
-        }
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 0; color: var(--dark); line-height: 1.6; }
-        
-        header { 
-            background: linear-gradient(135deg, #00416a, #1c92d2); 
-            color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        :root {
+            --blue: #004a99;
+            --light-blue: #007bff;
+            --orange: #ff8800;
+            --success: #25D366;
+            --text: #2d3436;
         }
 
-        .container { max-width: 550px; margin: -30px auto 50px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; color: var(--text); background-color: #f8f9fa; line-height: 1.6; }
+
+        /* HERO SECTION */
+        header {
+            background: linear-gradient(rgba(0, 74, 153, 0.9), rgba(0, 74, 153, 0.9)), 
+                        url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            background-size: cover; background-position: center;
+            color: white; padding: 80px 20px; text-align: center;
+        }
+
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        header p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* SECCIÓN PASOS */
+        .section { padding: 50px 20px; max-width: 900px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
         
+        .card {
+            background: white; padding: 25px; border-radius: 15px; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s;
+        }
+        .card i { font-size: 40px; color: var(--orange); margin-bottom: 15px; }
+        .card h3 { margin: 10px 0; color: var(--blue); }
+
+        /* FORMULARIO Y PAGO */
+        .order-container {
+            background: white; max-width: 550px; margin: -50px auto 50px;
+            padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
         .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .step.active { display: block; }
 
-        .price-tag {
-            background: #fff3e0; border: 2px solid var(--accent); color: #e67e22;
-            padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 25px;
+        label { display: block; margin-top: 15px; font-weight: bold; color: var(--blue); }
+        input { width: 100%; padding: 15px; margin-top: 5px; border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px; }
+
+        /* BOTONES */
+        .btn {
+            display: block; width: 100%; padding: 18px; border: none; border-radius: 12px;
+            font-weight: bold; font-size: 18px; cursor: pointer; text-decoration: none;
+            text-align: center; margin-top: 20px; transition: 0.3s; color: white;
         }
+        .btn-next { background: var(--blue); }
+        .btn-paypal { background: #003087; }
+        .btn-cashapp { background: #00d084; }
+        .btn-wa { background: var(--success); }
 
-        h2 { color: var(--primary); text-align: center; margin-top: 0; }
-        p { text-align: center; color: #636e72; font-size: 15px; }
-
-        input { width: 100%; padding: 14px; margin-top: 12px; border-radius: 10px; border: 2px solid #eee; box-sizing: border-box; font-size: 16px; }
-        
-        button, .btn-link { 
-            display: block; width: 100%; padding: 18px; border: none; border-radius: 12px; 
-            font-weight: bold; font-size: 17px; cursor: pointer; text-decoration: none; text-align: center; margin-top: 15px; transition: 0.3s;
+        .price-highlight {
+            background: #fff3e0; border: 2px dashed var(--orange);
+            padding: 20px; border-radius: 15px; margin: 20px 0; text-align: center;
         }
+        .price-highlight h4 { margin: 0; color: #e67e22; font-size: 24px; }
 
-        .btn-next { background: var(--primary); color: white; border-bottom: 4px solid #003d80; }
-        .btn-paypal { background: var(--paypal); color: white; border-bottom: 4px solid #001e54; }
-        .btn-cashapp { background: var(--cashapp); color: white; border-bottom: 4px solid #009e64; }
-        .btn-whatsapp { background: var(--success); color: white; border-bottom: 4px solid #1da851; }
-
-        .info-box { background: #f8f9fa; border-left: 5px solid var(--primary); padding: 15px; margin: 20px 0; font-size: 14px; border-radius: 0 10px 10px 0; }
-        
-        .secure-badge { text-align: center; margin-top: 20px; font-size: 12px; color: #95a5a6; }
+        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>TRABAJO FÁCIL HISPANO</h1>
-    <p>Tu Éxito Profesional Empieza Aquí</p>
+    <p>No solo hacemos tu CV, diseñamos tu futuro laboral en Estados Unidos.</p>
 </header>
 
-<div class="container">
-    <div class="price-tag">Total: $25.00 USD</div>
+<section class="section">
+    <div class="grid">
+        <div class="card">
+            <i class="fas fa-file-invoice"></i>
+            <h3>Diseño Moderno</h3>
+            <p>CVs optimizados para sistemas ATS de selección automática.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-bolt"></i>
+            <h3>Entrega Rápida</h3>
+            <p>Recibe tu nuevo perfil profesional en menos de 48 horas.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-language"></i>
+            <h3>100% en Inglés/Español</h3>
+            <p>Adaptamos tu experiencia al mercado estadounidense.</p>
+        </div>
+    </div>
+</section>
 
+<div class="order-container">
     <form action="https://formspree.io/f/xbdaalww" method="POST" id="mainForm" onsubmit="saveLead()">
         
         <div class="step active" id="step1">
-            <h2>Paso 1: Información de Contacto</h2>
-            <p>Ingresa tus datos para registrar tu solicitud en nuestro sistema.</p>
-            <input type="text" name="Nombre" id="nombre" placeholder="Nombre completo" required>
-            <input type="tel" name="WhatsApp" id="telefono" placeholder="Número de WhatsApp" required>
-            <input type="text" name="Ubicacion" id="ciudad" placeholder="Ciudad y Estado">
+            <h2 style="text-align:center; color: var(--blue);">Comienza tu Cambio</h2>
+            <p style="text-align:center;">Registra tus datos para iniciar el proceso de revisión.</p>
             
-            <button type="button" class="btn-next" onclick="nextStep()">Continuar al Pago →</button>
+            <label>Nombre Completo</label>
+            <input type="text" name="Nombre" id="nombre" placeholder="Ej. Juan Pérez" required>
+            
+            <label>WhatsApp</label>
+            <input type="tel" name="WhatsApp" id="telefono" placeholder="Ej. +1 272..." required>
+            
+            <label>Ciudad y Estado</label>
+            <input type="text" name="Ubicacion" id="ciudad" placeholder="Ej. Miami, FL">
+
+            <button type="button" class="btn btn-next" onclick="showStep(2)">Continuar a la Orden →</button>
         </div>
 
         <div class="step" id="step2">
-            <h2>Paso 2: Pago Seguro</h2>
-            <p>Selecciona tu método de pago preferido para activar el servicio de $25.</p>
+            <h2 style="text-align:center;">Tu Inversión</h2>
+            <div class="price-highlight">
+                <p>Servicio Completo de CV Profesional</p>
+                <h4>$25.00 USD</h4>
+            </div>
+            
+            <p>Selecciona tu método de pago preferido:</p>
 
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=lucia.m.guerrero@gmail.com&item_name=Servicio+CV+Profesional+Hispano&amount=25.00&currency_code=USD" 
-               class="btn-link btn-paypal" target="_blank">
-                Pagar con PayPal
-            </a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=lucia.m.guerrero@gmail.com&item_name=Servicio+CV+Hispano&amount=25.00&currency_code=USD" 
+               class="btn btn-paypal" target="_blank">Pagar con PayPal</a>
 
             <a href="https://cash.app/$luciaguerrero1909/25" 
-               class="btn-link btn-cashapp" target="_blank">
-                Pagar con Cash App
-            </a>
+               class="btn btn-cashapp" target="_blank">Pagar con Cash App</a>
 
-            <div class="info-box">
-                <strong>¿Qué hacer después de pagar?</strong><br>
-                Una vez realizado el pago, presiona el botón de abajo para enviarnos tu archivo (PDF o Foto) y el comprobante por WhatsApp.
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 14px;">
+                <strong>Último paso:</strong> Después de pagar, presiona el botón de abajo para enviarnos tu archivo y comprobante.
             </div>
 
-            <button type="submit" class="btn-whatsapp" onclick="openWhatsApp(event)">
-                FINALIZAR Y ADJUNTAR CV
+            <button type="submit" class="btn btn-wa" onclick="finishOrder(event)">
+                <i class="fab fa-whatsapp"></i> ENVIAR COMPROBANTE Y CV
             </button>
+            
+            <button type="button" style="background:none; border:none; color: #888; cursor:pointer; width:100%; margin-top:10px;" onclick="showStep(1)">← Volver a mis datos</button>
         </div>
     </form>
-
-    <div class="secure-badge">🔒 Pago Seguro y Encriptado</div>
 </div>
 
+<footer>
+    &copy; 2026 Trabajo Fácil Hispano. Todos los derechos reservados.<br>
+    Desarrollado para la comunidad latina en USA.
+</footer>
+
 <script>
-    function nextStep() {
-        const n = document.getElementById('nombre').value;
-        const t = document.getElementById('telefono').value;
-        if(n && t) {
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            alert("Por favor, completa tu nombre y número de teléfono.");
+    function showStep(s) {
+        if(s === 2) {
+            const n = document.getElementById('nombre').value;
+            const t = document.getElementById('telefono').value;
+            if(!n || !t) { alert("Por favor completa tu nombre y WhatsApp"); return; }
         }
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step' + s).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function openWhatsApp(e) {
+    function finishOrder(e) {
         const nombre = document.getElementById('nombre').value;
-        
-        // Mensaje que recibirás en tu WhatsApp Business
         const mensaje = encodeURIComponent(
             "¡Hola Trabajo Fácil Hispano!\n\n" +
-            "He registrado mis datos y estoy listo para procesar mi CV ($25).\n" +
-            "Cliente: " + nombre + "\n\n" +
-            "A continuación adjunto mi comprobante y el archivo para mi nuevo perfil profesional."
+            "He registrado mis datos para mi CV Profesional ($25).\n" +
+            "Nombre: " + nombre + "\n\n" +
+            "Adjunto mi comprobante y mi archivo actual."
         );
-
         const waUrl = "https://api.whatsapp.com/send?phone=12724478793&text=" + mensaje;
         
-        // Abrimos el WhatsApp en una pestaña nueva después de un pequeño delay
-        setTimeout(() => {
-            window.open(waUrl, '_blank');
-        }, 800);
+        setTimeout(() => { window.open(waUrl, '_blank'); }, 1000);
     }
 
     function saveLead() {
-        // Esta función guarda localmente para tu panel de Admin (LuciA1909$)
         const leads = JSON.parse(localStorage.getItem('leads') || "[]");
-        leads.unshift({
-            fecha: new Date().toLocaleDateString(),
-            n: document.getElementById('nombre').value,
-            t: document.getElementById('telefono').value
-        });
+        leads.unshift({fecha: new Date().toLocaleDateString(), n: document.getElementById('nombre').value});
         localStorage.setItem('leads', JSON.stringify(leads.slice(0,50)));
     }
 </script>
-
 </body>
 </html>
