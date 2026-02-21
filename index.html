@@ -11,26 +11,9 @@
         .container { max-width: 500px; margin: -20px auto 50px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .step { display: none; } .step.active { display: block; }
         input, textarea { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
-        
-        /* Caja del archivo mejorada para que sí funcione el click */
-        .file-box {
-            border: 2px dashed var(--accent);
-            background: #fff9f2;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .file-box input[type="file"] {
-            border: none;
-            background: none;
-            padding: 0;
-            margin-top: 5px;
-            cursor: pointer;
-        }
-
+        .file-box { border: 2px dashed var(--accent); background: #fff9f2; padding: 20px; border-radius: 10px; margin-top: 15px; text-align: center; }
         button { width: 100%; padding: 15px; border: none; background: var(--primary); color: white; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 20px; }
-        .whatsapp-btn { display: block; background: var(--success); color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; font-size: 16px; }
+        .whatsapp-btn { display: block; background: var(--success); color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .admin-panel { display: none; position: fixed; top: 10%; left: 5%; width: 90%; background: white; z-index: 100; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border-radius: 10px; }
     </style>
 </head>
@@ -53,16 +36,13 @@
         </div>
 
         <div class="step" id="step2">
-            <h3>Paso 2: Tu Experiencia y Archivos</h3>
-            
+            <h3>Paso 2: Tu Experiencia</h3>
             <div class="file-box">
                 <label style="font-weight: bold; color: var(--accent);">¿Tienes tu CV en foto o PDF?</label>
-                <p style="font-size: 11px; color: #666; margin-bottom: 5px;">Selecciónalo aquí para cargarlo:</p>
-                <input type="file" id="archivo_visual" onchange="console.log('Archivo seleccionado')">
+                <p style="font-size: 11px; color: #666;">Selecciónalo aquí para tenerlo listo:</p>
+                <input type="file" id="archivo_visual">
             </div>
-
-            <textarea name="Resumen_Experiencia" id="experiencia" rows="5" placeholder="O escribe aquí tus trabajos anteriores..." style="margin-top:15px;"></textarea>
-            
+            <textarea name="Resumen_Experiencia" id="experiencia" rows="5" placeholder="O escribe aquí tu experiencia..." style="margin-top:15px;"></textarea>
             <button type="button" onclick="nextStep()">Revisar Todo</button>
         </div>
 
@@ -70,15 +50,16 @@
             <h3>Paso 3: Envío Final</h3>
             <div id="resumen" style="background:#f9f9f9; padding:15px; border-radius:8px; font-size:14px; margin-bottom: 15px;"></div>
             
-            <button type="submit">🚀 1. REGISTRAR POR EMAIL</button>
+            <p style="font-size: 13px; color: #d9534f; font-weight: bold;">IMPORTANTE: Debes completar los dos botones:</p>
             
-            <p style="text-align:center; margin:15px 0; font-weight:bold; color: #999;">O POR WHATSAPP (RECOMENDADO)</p>
+            <button type="submit">1️⃣ REGISTRAR MIS DATOS (EMAIL)</button>
             
             <a id="waBtn" class="whatsapp-btn" target="_blank" onclick="generateWALink()">
-                💬 2. ENVIAR POR WHATSAPP
+                2️⃣ ENVIAR ARCHIVO POR WHATSAPP
             </a>
-            <p style="font-size:11px; color:#d9534f; text-align:center; margin-top:10px; font-weight: bold;">
-                ¡RECUERDA ADJUNTAR TU ARCHIVO EN EL CHAT QUE SE ABRA!
+            
+            <p style="font-size: 11px; color: #666; text-align: center; margin-top: 10px;">
+                *Al presionar el botón verde, adjunta tu foto o PDF en el chat.
             </p>
         </div>
     </form>
@@ -86,41 +67,37 @@
 
 <div id="adminBox" class="admin-panel">
     <h3>Admin - Clientes <span onclick="closeAdmin()" style="float:right; color:red; cursor:pointer;">X</span></h3>
-    <div id="adminList" style="max-height:300px; overflow-y:auto;"></div>
-    <button onclick="localStorage.clear(); location.reload();" style="background:red;">Borrar Historial</button>
+    <div id="adminList"></div>
+    <button onclick="localStorage.clear(); location.reload();" style="background:red;">Limpiar Lista</button>
 </div>
 
 <script>
     let step = 1;
     function nextStep() {
-        if(step === 1) {
-            document.getElementById('resumen').innerText = "Nombre: " + document.getElementById('nombre').value + "\nTel: " + document.getElementById('telefono').value + "\nUbicación: " + document.getElementById('ciudad').value;
-        }
+        if(step === 1) document.getElementById('resumen').innerText = "Nombre: " + document.getElementById('nombre').value + "\nTel: " + document.getElementById('telefono').value;
         document.getElementById('step'+step).classList.remove('active');
         step++;
         document.getElementById('step'+step).classList.add('active');
     }
 
     function generateWALink() {
-    const nombre = document.getElementById('nombre').value;
-    const exp = document.getElementById('experiencia').value || "Enviará archivo adjunto.";
-    const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí envío mis datos para mi nuevo CV:\n\nExperiencia: " + exp + "\n\n(Adjunto mi archivo a continuación)");
-    
-    // Usamos api.whatsapp.com que es más compatible para forzar la apertura en Business
-    document.getElementById('waBtn').href = "https://api.whatsapp.com/send?phone=12724478793&text=" + msg;
-}
+        const nombre = document.getElementById('nombre').value;
+        const msg = encodeURIComponent("¡Hola! Soy " + nombre + ". Aquí envío mis datos y a continuación ADJUNTO MI ARCHIVO de CV:");
+        // Esta URL es más potente para forzar la apertura de la App
+        document.getElementById('waBtn').href = "https://api.whatsapp.com/send?phone=12724478793&text=" + msg;
+    }
 
-    // ADMIN LOGIC
+    // ADMIN
     let clicks = 0;
     function checkAdminAccess() {
         clicks++;
         if(clicks === 5) {
-            const p = prompt("Contraseña Administrativa:");
+            const p = prompt("Clave:");
             if(p === "LuciA1909$") {
                 const list = JSON.parse(localStorage.getItem('leads') || "[]");
-                document.getElementById('adminList').innerHTML = list.map(l => `<p style="border-bottom:1px solid #eee; padding:5px;">${l.fecha} - <b>${l.n}</b> - ${l.t}</p>`).join('');
+                document.getElementById('adminList').innerHTML = list.map(l => `<p>${l.fecha} - ${l.n}</p>`).join('');
                 document.getElementById('adminBox').style.display = 'block';
-            } else { alert("Acceso denegado"); }
+            }
             clicks = 0;
         }
         setTimeout(() => clicks = 0, 2000);
@@ -128,10 +105,9 @@
     function closeAdmin() { document.getElementById('adminBox').style.display = 'none'; }
     function saveLead() {
         const leads = JSON.parse(localStorage.getItem('leads') || "[]");
-        leads.unshift({fecha: new Date().toLocaleDateString(), n: document.getElementById('nombre').value, t: document.getElementById('telefono').value});
+        leads.unshift({fecha: new Date().toLocaleDateString(), n: document.getElementById('nombre').value});
         localStorage.setItem('leads', JSON.stringify(leads.slice(0,30)));
     }
 </script>
 </body>
 </html>
-
